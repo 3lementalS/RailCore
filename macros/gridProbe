@@ -1,4 +1,4 @@
-G91
-G1 Z5
-M557 X10:280 Y50:280 S30
-G29
+G91                         ;Set to Relative Positioning
+G1 Z5                       ;Move Z down 5mm
+M557 X10:280 Y50:280 S30    ;Set Z probe point or define probing grid
+G29                         ;Mesh bed probe
