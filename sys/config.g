@@ -2,12 +2,10 @@
 ; Communication and general
 M111 S0                             	; Debug off
 M550 P"RailCore"				        ; Machine name and Netbios name (can be anything you like)
-M551 P"GGamer1894@!"                    ; Machine password (used for FTP)
-;*** Wifi Networking
+;M551 P"GGamer1894@!"                    ; Machine password (used for FTP)
 M552 S1								    ; Enable WiFi
 M555 P2                           	    ; Set compatibility S2:Marlin
 M575 P1 B57600 S1					    ; Set serial comms parameters [Channel (P)1, (B)aud Rate:57600, (S)1:PanelDue mode, checksum required]
-
 G21                                 	; Set Units to Millimeters
 G90                                		; Set to Absolute Positioning
 M83                                 	; Set extruder to relative mode
@@ -43,7 +41,7 @@ M566 Z100                               ; Maximum jerk speeds mm/minute
 M584 E3                                 ; Set drive mapping extruder (E0) to drive 3
 M569 P3 S1                              ; Drive 3 goes forwards
 M350 E16 I1	                            ; Set 16x microstepping w/ interpolation
-M92 E837	                            ; Set axis steps per unit
+M92 E830	                            ; Set axis steps per unit
 ;Kinematics
 M906 E800 I60	                        ; Set motor currents (mA)
 M201 E1500                              ; Accelerations (mm/s^2)
