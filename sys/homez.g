@@ -1,6 +1,6 @@
 
 G91                 ; Set to Relative Positioning
-G1 Z5 F900 H2       ; Move Z down mm @900mm/min (15mm/sec)
+G1 H2 Z5 F6000       ; Move Z down 5mm @3000mm/min (50mm/sec)
 G90                 ; Set to Absolute Positioning
 G1 X150 Y150 F6000  ; Move to the center of the bed @6000mm/min (100mm/sec)
 ; M558  Fxxx sets the probing speed.
