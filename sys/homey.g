@@ -1,5 +1,3 @@
-; Y axis homing file for dc42 Duet firmware
-
 G91                 ; Set to Relative Positioning
 G1 H2 Z5 F6000      ; Move Z down 5mm @200mm/min 
 G1 H1 Y-325 F3000   ; Move Y to the left 325mm @3000/min, stop when enstop is triggered

@@ -1,4 +1,3 @@
-; Configuration file for My Printer RRF3.1.1
 ; Communication and general
 M111 S0                             	; Debug off
 M550 P"RailCore"				        ; Machine name and Netbios name (can be anything you like)
