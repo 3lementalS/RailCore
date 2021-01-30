@@ -1,3 +1,0 @@
-G92 Z0      ;Set Z to 0
-G1 Z5       ;Move bed down
-G30 S-1     ;Probe current XY position.
