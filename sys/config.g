@@ -1,5 +1,6 @@
 ; Communication and general
-M111 S0                     ; Debug off
+; Duet GCode: https://duet3d.dozuki.com/Wiki/Gcode
+M111 S0                 ; Debug off
 M550 P"RailCore"	    ; Machine name and Netbios name (can be anything you like)
 M551 P"GGamer1894@!"    ; Machine password (used for FTP)
 M552 S1				    ; Enable WiFi
@@ -13,7 +14,7 @@ G90                     ; Set to Absolute Positioning
 M83                     ; Set extruder to relative mode
 M669 K1				    ; Select CoreXY
 
-; XY Axis
+; XY Axis               ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
 M584 X0 Y1              ; Set drive mapping X to drive 0, Y to drive 1
 M569 P0 S0              ; Drive 0 goes forwards [X-Axis, Rear Motor]
 M569 P1 S0              ; Drive 1 goes forwards [Y-Axis, Front motor]
@@ -100,10 +101,10 @@ T0					            ; Select Tool 0
 ; IR Sensor
 ; M558 P1 F120 H5 T6000 A5 S0.02 C"^zprobe.in"  ; Z probe is an IR probe and is not used for homing any axes
 ; G31 X0 Y30 Z2.00 P500			                ; Set Probe status, offsets
-; M557 X15:215 Y15:195 S20                      ; Define mesh grid
+; M557 X15:215 Y15:195 P20                      ; Define mesh grid
 
 ; BLTouch
 ; M950 S0 C"duex.pwm1"
 ; M558 P9 F50 H5 T6000 A5 S0.02 C"^zprobe.in"   ; Set Z probe type [P9:BLTouch, (F)eedrate:50, Dive-(H)eight:5mm, (T)ravel:6000, 5 probes per point, 0.02 tolerance]
 ; G31 P25 X2 Y42 Z2.65                          ; Set Z probe trigger value, offset and trigger height
-; M557 X15:215 Y15:195 S20                      ; Define mesh grid
+; M557 X15:215 Y15:195 P20                      ; Define mesh grid
