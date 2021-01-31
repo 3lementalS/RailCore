@@ -108,3 +108,11 @@ T0					            ; Select Tool 0
 ; M558 P9 F50 H5 T6000 A5 S0.02 C"^zprobe.in"   ; Set Z probe type [P9:BLTouch, (F)eedrate:50, Dive-(H)eight:5mm, (T)ravel:6000, 5 probes per point, 0.02 tolerance]
 ; G31 P25 X2 Y42 Z2.65                          ; Set Z probe trigger value, offset and trigger height
 ; M557 X15:215 Y15:195 P20                      ; Define mesh grid
+
+; Custom settings
+M81                     ; ATX Power Off
+
+; Soft Power Control
+M950 J0 C"^duex.gp1"    ; create GPIO input pin 0 attached to GPIO1 pin - Senses Power Button, Low=Button Pressed (Blue Wire)
+M581 P0 S1 T2 C0        ; When GPIO1 goes Low, execute trigger2.g to complete shutdown
+M950 P1 C"!duex.gp2"    ; create GPIO output pin 1 attached to GPIO2 pin - Controls Duet2 On=S1 (default), Off=S0 (Purple Wire)
