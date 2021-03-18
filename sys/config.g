@@ -112,13 +112,13 @@ G10 P0 R0 S0                    ; set initial tool 0 active and standby temperat
 T0								; Select Tool 0
 
 ; Custom settings
-M81												; ATX Power Off
+M81						        ; ATX Power Off
 
 ; Soft Power Control
 ; Input
 ;M950 J0 C"^duex.gp1"	;
 ; Output 
-;M950 P1 C"duex.gp2"		;
+;M950 P1 C"duex.gp2"    ;
 ; Trigger
 ;M581 P1 T2				;
 
