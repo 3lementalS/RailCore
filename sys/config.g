@@ -21,14 +21,11 @@ M569 P0.0 S1 D3 V40     ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
 M569 P0.1 S0 D3 V40     ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
 M350 X16 Y16 I1	        ; Set 16x microstepping w/ interpolation
 M92 X200 Y200	        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-;M906 X840 Y840 I60    	; Set motor currents (mA) 50%
-;M906 X1006 Y1006 I60   ; Set motor currents (mA) 60%
-M906 X1126 Y1126 I60   ; Set motor currents (mA) 67%
-;M906 X1428 Y1428 I60   ; Set motor currents (mA) 85%
+M906 X1126 Y1126 I60    ; Set motor currents (mA) 67%
 ; Kinematics
-M201 X3000 Y3000        ; Accelerations (mm/s^2)
-M203 X18000 Y18000      ; Maximum speed [300mm/sec]
-M566 X600 Y600          ; Maximum jerk speeds [10mm/sec]
+M201 X1500 Y1500        ; Accelerations (mm/s^2)
+M203 X12000 Y12000      ; Maximum speed [200mm/sec]
+M566 X100 Y100          ; Maximum jerk speeds [1.66667mm/sec]
 
 ; Z Axis 0.9 2-Start Leadscrew TR8-4
 M584 Z0.2:0.3:0.4       ; Set drive mapping Z to drive 2, 3, 4
@@ -37,14 +34,11 @@ M569 P0.3 S0 D3 V40     ; Drive 6 goes backwards	[Rear Left Z]
 M569 P0.4 S0 D3 V40     ; Drive 7 goes backwards	[Right Z]
 M350 Z16 I1	       		; Set 16x microstepping w/ interpolation
 M92 Z1600	      		; Set axis steps per unit
-M906 Z840 I60	        ; Set motor currents (mA) 50%
-;M906 Z1008 I60	        ; Set motor currents (mA) 60%
 M906 Z1126 I60	        ; Set motor currents (mA) 67%
-;M906 Z1428 I60	        ; Set motor currents (mA) 85%
 ; Kinematics
-M201 Z100               ; Accelerations (mm/s^2)
-M203 Z900               ; Maximum speed [15mm/sec]
-M566 Z100               ; Maximum jerk speed [0.2mm/sec]
+M201 Z200               ; Accelerations (mm/s^2)
+M203 Z720               ; Maximum speed [12mm/sec]
+M566 Z18                ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
 M584 E0.5               ; Set drive mapping extruder (E0) to drive 5
@@ -53,9 +47,9 @@ M350 E16 I1	        	; Set 16x microstepping w/ interpolation
 M92 E830	        	; Set axis steps per unit
 M906 E938 I60	        ; Set motor currents (mA)
 ; Kinematics
-M201 E10000            	; Accelerations (mm/s^2)
-M203 E3600              ; Maximum speed [60mm/sec]
-M566 E120              	; Maximum jerk speed  [2mm/sec]
+M201 E5000            	; Accelerations (mm/s^2)
+M203 E7200              ; Maximum speed [120mm/sec]
+M566 E210              	; Maximum jerk speed  [3.5mm/sec]
 
 M84 S30                 ; Set idle timeout
 
@@ -90,8 +84,8 @@ M143 H0 S80                                                             ; set te
 M308 S1 P"spi.cs0" Y"rtd-max31865" A"Print-Head_Temp"   ; configure sensor 1 as thermocouple via CS pin spi.cs0
 M950 H1 C"out1" T1                                      ; create nozzle heater output on out1 and map it to sensor 1
 M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
-M143 H1 S300                                            ; set temperature limit for heater 1 to 300C
-;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 minutes.
+M143 H1 S350                                            ; set temperature limit for heater 1 to 350C
+;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 seconds.
 
 ;Virtual Sensor
 M308 S3 P"temp1" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
@@ -116,11 +110,11 @@ M81						        ; ATX Power Off
 
 ; Soft Power Control
 ; Input
-;M950 J0 C"^duex.gp1"	;
+M950 J0 C"^io1.in"      ;
 ; Output 
-;M950 P1 C"duex.gp2"    ;
+M950 P1 C"!io1.out"     ;
 ; Trigger
-;M581 P1 T2				;
+M581 P1 T2              ;
 
 ; Miscellaneous
 M575 P1 S1 B57600                                  ; enable support for PanelDue
