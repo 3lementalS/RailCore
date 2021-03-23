@@ -92,8 +92,8 @@ M143 H1 S350                                            ; Maximum H1 (Extruder) 
 M950 F0 C"fan0" Q500            ; Create fan 0 on pin fan0 and set its frequency
 M106 P0 S0 H-1 C"Part-Fan"      ; Set fan 0 name, value, PWM signal inversion and frequency. Thermostatic control is turned off
 ; Print Fan
-M950 F1 C"fan1" Q500            ; Create fan 1 on pin fan1 and set its frequency
-M106 P1 S1 H1 T45 C"Tool-Fan"   ; Set fan 1 name, value, PWM signal inversion and frequency. Thermostatic control is turned on
+M950 F1 C"fan1" Q500                ; Create fan 1 on pin fan1 and set its frequency
+M106 P1 S0.50 H1 T45 C"Tool-Fan"    ; Set fan 1 name, value, PWM signal inversion and frequency. Thermostatic control is turned on
 
 ; Tool definitions
 M563 P0 S"Print-Head" D0 H1 F0  ; Define tool 0
@@ -115,14 +115,6 @@ M557 X15:280 Y35:260 P3:3                      	; Define mesh grid
 
 ; Custom settings
 M81												; ATX Power Off
-
-; Soft Power Control
-; Input
-M950 J0 C"^duex.gp1"	;
-; Output 
-M950 P1 C"duex.gp2"		;
-; Trigger
-M581 P1 T2				;
 
 ;Virtual Sensor
 M308 S3 P"duex.e2temp" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
