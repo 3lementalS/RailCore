@@ -71,6 +71,7 @@ M208 X0 Y0 Z-0.5 S1     ; Set axis min travel [Adjust to make X=0 and Y=0 the ed
 M308 S0 P"bedtemp" Y"thermistor" A"Keenovo" T100000 B3950 R4700 H0 L0
 M950 H0 C"bedheat" T0                                   ; Create bed heater
 M307 H0 A239.3 C431.9 D1.0 B0 S1.00 V0                  ; Set heating process parameters [H0:Bed, ACD, (B)angBang: Disabled, PWM:1.0]
+;M307 H0 R0.00 C431.9 D1.0 B0 S1.00 V0                  ; Set heating process parameters [H0:Bed, (B)angBang: Disabled, PWM:1.0]
 M143 H0 S80                                             ; Maximum H0 (Bed) heater temperature (Conservative)
 ; M140 S-273 R-273                                      ; Standby and initial Temp for bed as "off" (-273 = "off")
 
@@ -78,6 +79,7 @@ M143 H0 S80                                             ; Maximum H0 (Bed) heate
 M308 S1 P"spi.cs1" Y"rtd-max31865" A"Print-Head_Temp"
 M950 H1 C"e0heat" T1                                    ; Create bed heater
 M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
+;M307 H1 R243.5 C96.5 D1.7 B0 S1.00 V24.2				; Set heating process parameters [H1:Print-Head, (B)angBang: Disabled, PWM:1.0]
 M143 H1 S300                                            ; Maximum H1 (Extruder) heater temperature
 ;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 seconds.
 
