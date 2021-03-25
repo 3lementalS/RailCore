@@ -22,9 +22,9 @@ M350 X16 Y16 I1	        ; Set 16x microstepping w/ interpolation
 M92 X200 Y200	        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
 M906 X1126 Y1126 I60    ; Set motor currents (mA) 67%
 ; Kinematics
-M201 X3000 Y3000        ; Accelerations (mm/s^2)
-M203 X18000 Y18000      ; Maximum speed [300mm/sec]
-M566 X600 Y600          ; Maximum jerk speeds [10mm/sec]
+M201 X1000 Y1000        ; Accelerations (mm/s^2)
+M203 X12000 Y12000      ; Maximum speed [200mm/sec]
+M566 X360 Y360          ; Maximum jerk speeds [6mm/sec]
 
 ; Z Axis 0.9 2-Start Leadscrew TR8-4
 M584 Z5:6:7             ; Set drive mapping Z to drive 5, 6, and 7 for DueX5
@@ -35,9 +35,9 @@ M350 Z16 I1	       		; Set 16x microstepping w/ interpolation
 M92 Z1600	      		; Set axis steps per unit
 M906 Z1126 I60	        ; Set motor currents (mA) 67%
 ; Kinematics
-M201 Z100               ; Accelerations (mm/s^2)
-M203 Z900               ; Maximum speed [15mm/sec]
-M566 Z100               ; Maximum jerk speed [0.2mm/sec]
+M201 Z200               ; Accelerations (mm/s^2)
+M203 Z720               ; Maximum speed [12mm/sec]
+M566 Z18                ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
 M584 E3                 ; Set drive mapping extruder (E0) to drive 3
@@ -46,9 +46,9 @@ M350 E16 I1	        	; Set 16x microstepping w/ interpolation
 M92 E830	        	; Set axis steps per unit
 M906 E938 I60	        ; Set motor currents (mA)
 ; Kinematics
-M201 E10000            	; Accelerations (mm/s^2)
-M203 E3600              ; Maximum speed [60mm/sec]
-M566 E120              	; Maximum jerk speed  [2mm/sec]
+M201 E5000            	; Accelerations (mm/s^2)
+M203 E7200              ; Maximum speed [120mm/sec]
+M566 E210              	; Maximum jerk speed [3.5mm/sec]
 
 M84 S30                 ; Set idle timeout
 
