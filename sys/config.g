@@ -20,10 +20,7 @@ M569 P0 S0              ; Drive 0 goes forwards [X-Axis, Rear Motor]
 M569 P1 S1              ; Drive 1 goes backwards [Y-Axis, Front motor]
 M350 X16 Y16 I1	        ; Set 16x microstepping w/ interpolation
 M92 X200 Y200	        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-M906 X840 Y840 I60    	; Set motor currents (mA) 50%
-;M906 X1006 Y1006 I60   ; Set motor currents (mA) 60%
-;M906 X1126 Y1126 I60   ; Set motor currents (mA) 67%
-;M906 X1428 Y1428 I60   ; Set motor currents (mA) 85%
+M906 X1126 Y1126 I60    ; Set motor currents (mA) 67%
 ; Kinematics
 M201 X3000 Y3000        ; Accelerations (mm/s^2)
 M203 X18000 Y18000      ; Maximum speed [300mm/sec]
@@ -36,10 +33,7 @@ M569 P6 S0				; Drive 6 goes backwards	[Rear Left Z]
 M569 P7 S0				; Drive 7 goes backwards	[Right Z]
 M350 Z16 I1	       		; Set 16x microstepping w/ interpolation
 M92 Z1600	      		; Set axis steps per unit
-M906 Z840 I60	        ; Set motor currents (mA) 50%
-;M906 Z1008 I60	        ; Set motor currents (mA) 60%
-;M906 Z1126 I60	        ; Set motor currents (mA) 67%
-;M906 Z1428 I60	        ; Set motor currents (mA) 85%
+M906 Z1126 I60	        ; Set motor currents (mA) 67%
 ; Kinematics
 M201 Z100               ; Accelerations (mm/s^2)
 M203 Z900               ; Maximum speed [15mm/sec]
