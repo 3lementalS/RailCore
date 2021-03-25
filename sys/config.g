@@ -99,7 +99,7 @@ G10 P0 R0 S0                        ; Set initial tool 0 active and standby temp
 T0								    ; Select Tool 0
 
 ; IR Sensor
-M558 P1 F120 H5 T6000 A5 S0.02 C"^zprobe.in"    ; Set Z probe type [P1:Mini-IR, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+M558 P1 F120 H5 T7200 A5 S0.02 C"^zprobe.in"    ; Set Z probe type [P1:Mini-IR, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
 G31 P500 X0 Y0 Z0							    ; Set Probe status, offsets
 M557 X15:280 Y35:260 P3:3                       ; Define mesh grid
 
