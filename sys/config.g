@@ -84,37 +84,38 @@ M143 H0 S80                                             ; Maximum H0 (Bed) heate
 M308 S1 P"spi.cs1" Y"rtd-max31865" A"Print-Head_Temp"
 M950 H1 C"e0heat" T1                                    ; Create bed heater
 M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
-M143 H1 S350                                            ; Maximum H1 (Extruder) heater temperature
-;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 minutes.
+M143 H1 S300                                            ; Maximum H1 (Extruder) heater temperature
+;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 seconds.
 
 ; Fans
 ; Part Cooling Fan
-M950 F0 C"fan0" Q500            ; Create fan 0 on pin fan0 and set its frequency
-M106 P0 S0 H-1 C"Part-Fan"      ; Set fan 0 name, value, PWM signal inversion and frequency. Thermostatic control is turned off
+M950 F0 C"fan0" Q500                ; Create fan 0 on pin fan0 and set its frequency
+M106 P0 S0 H-1 C"Part-Fan"          ; Set fan 0 name, value, PWM signal inversion and frequency. Thermostatic control is turned off
 ; Print Fan
 M950 F1 C"fan1" Q500                ; Create fan 1 on pin fan1 and set its frequency
-M106 P1 S0.50 H1 T45 C"Tool-Fan"    ; Set fan 1 name, value, PWM signal inversion and frequency. Thermostatic control is turned on
+M106 P1 S0.75 H1 T45 C"Tool-Fan"    ; Set fan 1 name, value, PWM signal inversion and frequency. Thermostatic control is turned on
 
 ; Tool definitions
-M563 P0 S"Print-Head" D0 H1 F0  ; Define tool 0
-M140 H0							; Define bed
-G10 P0 X0 Y0 Z0                 ; Set tool 0 axis offsets
-G10 P0 R0 S0                    ; Set initial tool 0 active and standby temperatures to 0C
-T0								; Select Tool 0
+M563 P0 S"Print-Head" D0 H1 F0      ; Define tool 0
+M140 H0							    ; Define bed
+G10 P0 X0 Y0 Z0                     ; Set tool 0 axis offsets
+G10 P0 R0 S0                        ; Set initial tool 0 active and standby temperatures to 0C
+T0								    ; Select Tool 0
 
 ; IR Sensor
-; M558 P1 F120 H5 T6000 A5 S0.02 C"^zprobe.in"  ; Z probe is an IR probe and is not used for homing any axes
-; G31 X0 Y30 Z2.00 P500							; Set Probe status, offsets
-; M557 X15:280 Y35:260 P20                      ; Define mesh grid
+M558 P1 F120 H5 T6000 A5 S0.02 C"^zprobe.in"    ; Set Z probe type [P1:Mini-IR, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+G31 P500 X0 Y0 Z0							    ; Set Probe status, offsets
+M557 X15:280 Y35:260 P3:3                       ; Define mesh grid
 
 ; BLTouch
-M950 S0 C"duex.pwm1"
-M558 P9 F120 H5 T7200 A5 S0.02 C"^zprobe.in"   	; Set Z probe type [P9:BLTouch, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
-G31 P25 X-2 Y33.5 Z2.851						; Set Z probe trigger value, offset and trigger height
-M557 X15:280 Y35:260 P3:3                      	; Define mesh grid
+;M950 S0 C"zprobe.mod"
+;M558 P9 F120 H5 T7200 A5 S0.02 C"^zprobe.in"   	; Set Z probe type [P9:BLTouch, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+;G31 P25 X-2 Y33.5 Z2.851						    ; Set Z probe trigger value, offset and trigger height
+;M557 X15:280 Y35:260 P3:3                      	; Define mesh grid
 
 ; Custom settings
 M81												; ATX Power Off
 
 ;Virtual Sensor
-M308 S3 P"duex.e2temp" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
+M308 S2 P"duex.e2temp" Y"thermistor" A"Chamber-high" T100000 B3950 R4700 H0 L0
+M308 S3 P"duex.e3temp" Y"thermistor" A"Chamber-low" T100000 B3950 R4700 H0 L0
