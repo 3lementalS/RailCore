@@ -15,23 +15,26 @@ M83                     ; Set extruder to relative mode
 M669 K1					; Select CoreXY
 
 ; Drives
-; XY Axis               ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 X0.0 Y0.1          ; Set drive mapping X to drive 0, Y to drive 1
-M569 P0.0 S1 D3 V40     ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
-M569 P0.1 S0 D3 V40     ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
-M350 X16 Y16 I1	        ; Set 16x microstepping w/ interpolation
-M92 X200 Y200	        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-M906 X1126 Y1126 I60    ; Set motor currents (mA) 67%
+; XY Axis                   ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 X0.0 Y0.1              ; Set drive mapping X to drive 0, Y to drive 1
+M569 P0.0 S1 D3 V25 H25     ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
+M569 P0.1 S0 D3 V25 H25     ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
+M350 X16 Y16 I1	            ; Set 16x microstepping w/ interpolation
+M92 X200 Y200	            ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
+M906 X1340 Y1340 I60        ; Set motor currents (mA) 67%
 ; Kinematics
-M201 X1500 Y1500        ; Accelerations (mm/s^2)
+M201 X1000 Y1000        ; Accelerations (mm/s^2)
 M203 X12000 Y12000      ; Maximum speed [200mm/sec]
 M566 X100 Y100          ; Maximum jerk speeds [1.66667mm/sec]
 
+; Stealthchop parameters
+M915 X Y S3 H402 T25
+
 ; Z Axis 0.9 2-Start Leadscrew TR8-4
 M584 Z0.2:0.3:0.4       ; Set drive mapping Z to drive 2, 3, 4
-M569 P0.2 S0 D3 V40     ; Drive 5 goes backwards	[Front Left Z]
-M569 P0.3 S0 D3 V40     ; Drive 6 goes backwards	[Rear Left Z]
-M569 P0.4 S0 D3 V40     ; Drive 7 goes backwards	[Right Z]
+M569 P0.2 S0 D3 V25     ; Drive 5 goes backwards	[Front Left Z]
+M569 P0.3 S0 D3 V25     ; Drive 6 goes backwards	[Rear Left Z]
+M569 P0.4 S0 D3 V25     ; Drive 7 goes backwards	[Right Z]
 M350 Z16 I1	       		; Set 16x microstepping w/ interpolation
 M92 Z1600	      		; Set axis steps per unit
 M906 Z1126 I60	        ; Set motor currents (mA) 67%
