@@ -55,8 +55,8 @@ M84 S30                                 ; Set idle timeout
 
 ; Stealthchop parameters
 M915 X Y S3 H402 T1
-M915 Z S3 H402 T1
-M915 E S3 H402 T20000
+M915 Z S3 H402* T1
+M915 E S3 H402* T20000
 
 ; Leadscrew locations
 M671 X-21:-21:326 Y18:273:148 S7.5 
