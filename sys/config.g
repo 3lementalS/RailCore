@@ -93,7 +93,7 @@ M143 H1 S350                                            ; set temperature limit 
 ;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 seconds.
 
 ;Virtual Sensor
-M308 S3 P"temp1" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
+M308 S2 P"temp1" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
 
 ; Fans
 ; Part Cooling Fan
