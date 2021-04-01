@@ -38,7 +38,7 @@ M350 Z16 I1	       		                ; Set 16x microstepping w/ interpolation
 M92 Z1600	      		                ; Set axis steps per unit
 M906 Z{2000 * 0.67} I30	                ; Set motor currents (mA)
 M201 Z200                               ; Accelerations (mm/s^2)
-M203 Z{10 * 60}                         ; Maximum speed
+M203 Z{12 * 60}                         ; Maximum speed
 M566 Z{0.3 * 60}                        ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
