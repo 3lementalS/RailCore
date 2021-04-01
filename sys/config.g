@@ -1,3 +1,6 @@
+Need motor spec for Z & E
+
+
 ; Communication and general
 ; Duet GCode: https://duet3d.dozuki.com/Wiki/Gcode
 M111 S0                 ; Debug off
@@ -15,46 +18,45 @@ M83                     ; Set extruder to relative mode
 M669 K1					; Select CoreXY
 
 ; Drives
-; XY Axis                   ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 X0.0 Y0.1              ; Set drive mapping X to drive 0, Y to drive 1
-M569 P0.0 S1 D3 V25 H25     ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
-M569 P0.1 S0 D3 V25 H25     ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
-M350 X16 Y16 I1	            ; Set 16x microstepping w/ interpolation
-M92 X200 Y200	            ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-M906 X1340 Y1340 I60        ; Set motor currents (mA) 67%
-; Kinematics
-M201 X1000 Y1000        ; Accelerations (mm/s^2)
-M203 X12000 Y12000      ; Maximum speed [200mm/sec]
-M566 X100 Y100          ; Maximum jerk speeds [1.66667mm/sec]
-
-; Stealthchop parameters
-M915 X Y S3 H402 T25
+; XY Axis                               ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 X0.0 Y0.1                          ; Set drive mapping X to drive 0, Y to drive 1
+M569 P0.0 S1 D3 V5 H5                   ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
+M569 P0.1 S0 D3 V5 H5                   ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
+M350 X16 Y16 I1	                        ; Set 16x microstepping w/ interpolation
+M92 X200 Y200	                        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
+M906 X{2000 * 0.67} Y{2000 * 0.67} I30  ; Set motor currents (mA)
+M201 X1000 Y1000                        ; Accelerations (mm/s^2)
+M203 X{200 * 60} Y{200 * 60}            ; Maximum speed
+M566 X{6 * 60} Y{6 * 60}                ; Maximum jerk speeds
 
 ; Z Axis 0.9 2-Start Leadscrew TR8-4
-M584 Z0.2:0.3:0.4       ; Set drive mapping Z to drive 2, 3, 4
-M569 P0.2 S0 D3 V25     ; Drive 5 goes backwards	[Front Left Z]
-M569 P0.3 S0 D3 V25     ; Drive 6 goes backwards	[Rear Left Z]
-M569 P0.4 S0 D3 V25     ; Drive 7 goes backwards	[Right Z]
-M350 Z16 I1	       		; Set 16x microstepping w/ interpolation
-M92 Z1600	      		; Set axis steps per unit
-M906 Z1126 I60	        ; Set motor currents (mA) 67%
-; Kinematics
-M201 Z200               ; Accelerations (mm/s^2)
-M203 Z720               ; Maximum speed [12mm/sec]
-M566 Z18                ; Maximum jerk speed [0.3mm/sec]
+M584 Z0.2:0.3:0.4                       ; Set drive mapping Z to drive 2, 3, 4
+M569 P0.2 S0 D3 V5 H5                   ; Drive 5 goes backwards	[Front Left Z]
+M569 P0.3 S0 D3 V5 H5                   ; Drive 6 goes backwards	[Rear Left Z]
+M569 P0.4 S0 D3 V5 H5                   ; Drive 7 goes backwards	[Right Z]
+M350 Z16 I1	       		                ; Set 16x microstepping w/ interpolation
+M92 Z1600	      		                ; Set axis steps per unit
+M906 Z{2000 * 0.67} I30	                ; Set motor currents (mA)
+M201 Z200                               ; Accelerations (mm/s^2)
+M203 Z{10 * 60}                         ; Maximum speed
+M566 Z{0.3 * 60}                        ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
-M584 E0.5               ; Set drive mapping extruder (E0) to drive 5
-M569 P0.5 S0 D2         ; Drive 5 goes backwards
-M350 E16 I1	        	; Set 16x microstepping w/ interpolation
-M92 E830	        	; Set axis steps per unit
-M906 E938 I60	        ; Set motor currents (mA)
-; Kinematics
-M201 E5000            	; Accelerations (mm/s^2)
-M203 E7200              ; Maximum speed [120mm/sec]
-M566 E210              	; Maximum jerk speed  [3.5mm/sec]
+M584 E0.5                               ; Set drive mapping extruder (E0) to drive 5
+M569 P0.5 S0 D2                         ; Drive 5 goes backwards
+M350 E16 I1	        	                ; Set 16x microstepping w/ interpolation
+M92 E830	        	                ; Set axis steps per unit
+M906 E{2000 * 0.67} I30	                ; Set motor currents (mA)
+M201 E5000            	                ; Accelerations (mm/s^2)
+M203 E{120 * 60}                        ; Maximum speed
+M566 E{3.5 * 60}              	        ; Maximum jerk speed
 
-M84 S30                 ; Set idle timeout
+M84 S30                                 ; Set idle timeout
+
+; Stealthchop parameters
+M915 X Y S3 H402 T1
+M915 Z S3 H402 T1
+M915 E S3 H402 T20000
 
 ; Leadscrew locations
 M671 X-21:-21:326 Y18:273:148 S7.5 
