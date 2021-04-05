@@ -34,7 +34,7 @@ M201 Y1000                          ; Accelerations (mm/s^2)
 M203 Y{120 * 60}                    ; Maximum speed
 M566 Y{6 * 60}                      ; Maximum jerk speeds
 
-; Z Axis 0.9 2-Start Leadscrew TR8-4
+; Z Axis 0.9 Leadscrew TR8-4
 M584 Z5:6:7                             ; Set drive mapping Z to drive 5, 6, and 7 for DueX5
 M569 P5 S0				                ; Drive 5 goes backwards	[Front Left Z]
 M569 P6 S0			                    ; Drive 6 goes backwards	[Rear Left Z]
