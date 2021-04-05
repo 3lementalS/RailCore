@@ -14,16 +14,25 @@ G90                     ; Set to Absolute Positioning
 M83                     ; Set extruder to relative mode
 M669 K1					; Select CoreXY
 
-; XY Axis                               ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 X0 Y1                              ; Set drive mapping X to drive 0, Y to drive 1
-M569 P0 S0                              ; Drive 0 goes forwards [X-Axis, Rear Motor]
-M569 P1 S1                              ; Drive 1 goes backwards [Y-Axis, Front motor]
-M350 X16 Y16 I1	                        ; Set 16x microstepping w/ interpolation
-M92 X200 Y200	                        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-M906 X{2000 * 0.67} Y{2000 * 0.67} I30  ; Set motor currents (mA)
-M201 X1000 Y1000                        ; Accelerations (mm/s^2)
-M203 X{120 * 60} Y{120 * 60}            ; Maximum speed
-M566 X{6 * 60} Y{6 * 60}                ; Maximum jerk speeds
+; X Axis                            ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 X0                             ; Set drive mapping X to drive 0, Y to drive 1
+M569 P0 S0                          ; Drive 0 goes forwards [X-Axis, Rear Motor]
+M350 X16 I1	                        ; Set 16x microstepping w/ interpolation
+M92 X{(360 / 0.9) / (16 * 2) * 16}  ; Set microsteps
+M906 X{2000 * 0.67} I30             ; Set motor currents (mA)
+M201 X1000                          ; Accelerations (mm/s^2)
+M203 X{120 * 60}                    ; Maximum speed
+M566 X{6 * 60}                      ; Maximum jerk speeds
+
+; Y Axis                            ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 Y1                             ; Set drive mapping X to drive 0, Y to drive 1
+M569 P1 S1                          ; Drive 1 goes backwards [Y-Axis, Front motor]
+M350 Y16 I1	                        ; Set 16x microstepping w/ interpolation
+M92 Y{(360 / 0.9) / (16 * 2) * 16}  ; Set microsteps
+M906 Y{2000 * 0.67} I30             ; Set motor currents (mA)
+M201 Y1000                          ; Accelerations (mm/s^2)
+M203 Y{120 * 60}                    ; Maximum speed
+M566 Y{6 * 60}                      ; Maximum jerk speeds
 
 ; Z Axis 0.9 2-Start Leadscrew TR8-4
 M584 Z5:6:7                             ; Set drive mapping Z to drive 5, 6, and 7 for DueX5
@@ -52,9 +61,9 @@ M84 S30                                 ; Set idle timeout
 
 ; Leadscrew locations
 M671 X-21:-21:326 Y18:273:148 S7.5 
-; Front left:(-21,18)
-; Rear Left:(-21,273)
-; Right (326,148)
+; Front left:   (-21,18)
+; Rear Left:    (-21,273)
+; Right         (326,148)
 
 ; Endstops
 M574 X1 P"xstop" S1     ; Configure active-high endstop for low end on X via pin xstop
@@ -96,13 +105,13 @@ G10 P0 R0 S0                        ; Set initial tool 0 active and standby temp
 T0								    ; Select Tool 0
 
 ; IR Sensor
-M558 P1 F120 H5 T7200 A5 S0.02 C"^zprobe.in"    ; Set Z probe type [P1:Mini-IR, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+M558 P1 F120 H5 T7200 A5 S0.02 C"^zprobe.in"    ; Set Z probe type [P1:Mini-IR, (F)eedrate:120mm/min, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
 G31 P500 X0 Y0 Z0							    ; Set Probe status, offsets
 M557 X15:280 Y35:260 P3:3                       ; Define mesh grid
 
 ; BLTouch
 ;M950 S0 C"zprobe.mod"
-;M558 P9 F120 H5 T7200 A5 S0.02 C"^zprobe.in"   ; Set Z probe type [P9:BLTouch, (F)eedrate:100, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+;M558 P9 F120 H5 T7200 A5 S0.02 C"^zprobe.in"   ; Set Z probe type [P9:BLTouch, (F)eedrate:120mm/min, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
 ;G31 P25 X-2 Y33.5 Z2.851					    ; Set Z probe trigger value, offset and trigger height
 ;M557 X15:280 Y35:260 P3:3                      ; Define mesh grid
 
