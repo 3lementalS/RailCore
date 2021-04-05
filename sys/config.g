@@ -18,7 +18,7 @@ M669 K1					; Select CoreXY
 M584 X0                             ; Set drive mapping X to drive 0, Y to drive 1
 M569 P0 S0                          ; Drive 0 goes forwards [X-Axis, Rear Motor]
 M350 X16 I1	                        ; Set 16x microstepping w/ interpolation
-M92 X{(360 / 0.9) / (16 * 2) * 16}  ; Set microsteps
+M92 X{(360 / 0.9) / (16 * 2) * 16}  ; Set axis steps per unit
 M906 X{2000 * 0.67} I30             ; Set motor currents (mA)
 M201 X1000                          ; Accelerations (mm/s^2)
 M203 X{120 * 60}                    ; Maximum speed
@@ -28,7 +28,7 @@ M566 X{6 * 60}                      ; Maximum jerk speeds
 M584 Y1                             ; Set drive mapping X to drive 0, Y to drive 1
 M569 P1 S1                          ; Drive 1 goes backwards [Y-Axis, Front motor]
 M350 Y16 I1	                        ; Set 16x microstepping w/ interpolation
-M92 Y{(360 / 0.9) / (16 * 2) * 16}  ; Set microsteps
+M92 Y{(360 / 0.9) / (16 * 2) * 16}  ; Set axis steps per unit
 M906 Y{2000 * 0.67} I30             ; Set motor currents (mA)
 M201 Y1000                          ; Accelerations (mm/s^2)
 M203 Y{120 * 60}                    ; Maximum speed
@@ -40,7 +40,8 @@ M569 P5 S0				                ; Drive 5 goes backwards	[Front Left Z]
 M569 P6 S0			                    ; Drive 6 goes backwards	[Rear Left Z]
 M569 P7 S0				                ; Drive 7 goes backwards	[Right Z]
 M350 Z16 I1	       		                ; Set 16x microstepping w/ interpolation
-M92 Z1600	      		                ; Set axis steps per unit
+;M92 Z1600	      		                ; Set axis steps per unit
+M92 Z{(360 / 0.9) / 4 * 16}	      	    ; Set axis steps per unit
 M906 Z{1680 * 0.67} I30	                ; Set motor currents (mA)
 M201 Z200                               ; Accelerations (mm/s^2)
 M203 Z{12 * 60}                         ; Maximum speed
