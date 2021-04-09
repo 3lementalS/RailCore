@@ -119,9 +119,9 @@ M106 P0 C"Part Fan" S0 H-1      ; set fan 0 name and value. Thermostatic control
 ;M950 F0 C"121.out1" Q500       ; create fan 0 on pin 121.out1 and set its frequency
 ;M106 P0 S0 H-1                 ; set fan 0 value. Thermostatic control is turned off
 ; Print Fan [Fan 1]
-M950 F1 C"out5" Q500            ; create fan 1 on pin out4 and set its frequency
+M950 F1 C"out5" Q10            ; create fan 1 on pin out4 and set its frequency
 M106 P1 C"Tool Fan" S1 H1 T45   ; set fan 1 name and value. Thermostatic control is turned on
-;M950 F1 C"121.out2" Q500       ; create fan 1 on pin 121.out2 and set its frequency
+;M950 F1 C"121.out2" Q10       ; create fan 1 on pin 121.out2 and set its frequency
 ;M106 P1 S1 H1 T45              ; set fan 1 value. Thermostatic control is turned on
 
 ; Tool definitions
