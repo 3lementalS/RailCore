@@ -1,6 +1,3 @@
-Need motor spec for Z & E
-
-
 ; Communication and general
 ; Duet GCode: https://duet3d.dozuki.com/Wiki/Gcode
 M111 S0                 ; Debug off
@@ -18,18 +15,27 @@ M83                     ; Set extruder to relative mode
 M669 K1					; Select CoreXY
 
 ; Drives
-; XY Axis                               ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 X0.0 Y0.1                          ; Set drive mapping X to drive 0, Y to drive 1
+; X Axis                                ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 X0.0                               ; Set drive mapping X to drive 0, Y to drive 1
 M569 P0.0 S1 D3 V5 H5                   ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
-M569 P0.1 S0 D3 V5 H5                   ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
-M350 X16 Y16 I1	                        ; Set 16x microstepping w/ interpolation
-M92 X200 Y200	                        ; Set axis steps per unit, X/Y may be more around 201.5 for accuracy
-M906 X{2000 * 0.67} Y{2000 * 0.67} I30  ; Set motor currents (mA)
-M201 X1000 Y1000                        ; Accelerations (mm/s^2)
-M203 X{200 * 60} Y{200 * 60}            ; Maximum speed
-M566 X{6 * 60} Y{6 * 60}                ; Maximum jerk speeds
+M350 X16 I1	                            ; Set 16x microstepping w/ interpolation
+M92 X{(360 / 0.9) / (16 * 2) * 16}      ; Set axis steps per unit
+M906 X{2000 * 0.67} I30                 ; Set motor currents (mA)
+M201 X1000                              ; Accelerations (mm/s^2)
+M203 X{200 * 60}                        ; Maximum speed
+M566 X{6 * 60}                          ; Maximum jerk speeds
 
-; Z Axis 0.9 2-Start Leadscrew TR8-4
+; Y Axis                                ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
+M584 Y0.1                               ; Set drive mapping X to drive 0, Y to drive 1
+M569 P0.1 S0 D3 V5 H5                   ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
+M350 Y16 I1	                            ; Set 16x microstepping w/ interpolation
+M92 Y{(360 / 0.9) / (16 * 2) * 16}      ; Set axis steps per unit
+M906 Y{2000 * 0.67} I30                 ; Set motor currents (mA)
+M201 Y1000                              ; Accelerations (mm/s^2)
+M203 Y{200 * 60}                        ; Maximum speed
+M566 Y{6 * 60}                          ; Maximum jerk speeds
+
+; Z Axis 0.9 Leadscrew TR8-4
 M584 Z0.2:0.3:0.4                       ; Set drive mapping Z to drive 2, 3, 4
 M569 P0.2 S0 D3 V5 H5                   ; Drive 5 goes backwards	[Front Left Z]
 M569 P0.3 S0 D3 V5 H5                   ; Drive 6 goes backwards	[Rear Left Z]
