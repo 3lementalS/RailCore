@@ -16,8 +16,8 @@ M669 K1					; Select CoreXY
 
 ; Drives
 ; X Axis                                ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 X0.0                               ; Set drive mapping X to drive 0, Y to drive 1
 M569 P0.0 S1 D3 V5 H5                   ; Drive 0.0 goes forwards [X-Axis, Rear Motor]
+M584 X0.0                               ; Set drive mapping X to drive 0, Y to drive 1
 M350 X16 I1	                            ; Set 16x microstepping w/ interpolation
 M92 X{(360 / 0.9) / (16 * 2) * 16}      ; Set axis steps per unit
 M906 X{2000 * 0.67} I30                 ; Set motor currents (mA)
@@ -26,8 +26,8 @@ M203 X{200 * 60}                        ; Maximum speed
 M566 X{6 * 60}                          ; Maximum jerk speeds
 
 ; Y Axis                                ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
-M584 Y0.1                               ; Set drive mapping X to drive 0, Y to drive 1
 M569 P0.1 S0 D3 V5 H5                   ; Drive 0.1 goes goes backwards [Y-Axis, Rear Motor]
+M584 Y0.1                               ; Set drive mapping X to drive 0, Y to drive 1
 M350 Y16 I1	                            ; Set 16x microstepping w/ interpolation
 M92 Y{(360 / 0.9) / (16 * 2) * 16}      ; Set axis steps per unit
 M906 Y{2000 * 0.67} I30                 ; Set motor currents (mA)
@@ -36,10 +36,10 @@ M203 Y{200 * 60}                        ; Maximum speed
 M566 Y{6 * 60}                          ; Maximum jerk speeds
 
 ; Z Axis 0.9 Leadscrew TR8-4
-M584 Z0.2:0.3:0.4                       ; Set drive mapping Z to drive 2, 3, 4
 M569 P0.2 S0 D3 V5 H5                   ; Drive 5 goes backwards	[Front Left Z]
 M569 P0.3 S0 D3 V5 H5                   ; Drive 6 goes backwards	[Rear Left Z]
 M569 P0.4 S0 D3 V5 H5                   ; Drive 7 goes backwards	[Right Z]
+M584 Z0.2:0.3:0.4                       ; Set drive mapping Z to drive 2, 3, 4
 M350 Z16 I1	       		                ; Set 16x microstepping w/ interpolation
 M92 Z{(360 / 0.9) / 4 * 16}	      	    ; Set axis steps per unit
 M906 Z{1680 * 0.67} I30	                ; Set motor currents (mA)
@@ -49,7 +49,9 @@ M566 Z{0.3 * 60}                        ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
 M584 E0.5                               ; Set drive mapping extruder (E0) to drive 5
+;M584 E121.0                               ; Set drive mapping extruder (E0) to drive 0 [ToolBoard]
 M569 P0.5 S0 D2                         ; Drive 5 goes backwards
+;M569 P121.0 S0 D2                         ; Drive 0 [ToolBoard] goes backwards
 M350 E16 I1	        	                ; Set 16x microstepping w/ interpolation
 M92 E830	        	                ; Set axis steps per unit
 M906 E{1400 * 0.67} I30	                ; Set motor currents (mA)
@@ -80,41 +82,47 @@ M574 Y1 S1 P"io1.in"        ; configure active-high endstop for low end on Y via
 M574 Z1 S2                  ; configure Z-probe endstop for low end on Z
 
 ; BLTouch
-M950 S0 C"io7.out"                                  ; create servo pin 0 for BLTouch
-M558 P9 C"^io7.in" H5 F120 T7200 A3 S0.02           ; Set Z probe type [P9:BLTouch, (F)eedrate:120, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
-G31 P25 X-2 Y33.5 Z2.851                            ; Set Z probe trigger value, offset and trigger height
-M557 X15:280 Y35:260 P3:3                      	    ; Define mesh grid
+;M950 S0 C"io7.out"                                 ; create servo pin 0 for BLTouch
+;M558 P9 C"^io7.in" H5 F120 T7200 A3 S0.02          ; Set Z probe type [P9:BLTouch, (F)eedrate:120, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
+;G31 P25 X-2 Y33.5 Z2.851                           ; Set Z probe trigger value, offset and trigger height
+;M557 X15:280 Y35:260 P3:3                          ; Define mesh grid
 
 ; Mini IR
 M558 P1 C"^io7.in" H5 F120 T7200 A3 S0.02           ; Set Z probe type [P9:BLTouch, (F)eedrate:120, Dive-(H)eight:5mm, (T)ravel:7200mm/min, 3 probes per point, 0.02mm tolerance]
-G31 P25 X-2 Y33.5 Z2.851                            ; Set Z probe trigger value, offset and trigger height
+G31 P500 X0 Y0 Z2.5                                 ; Set Z probe trigger value, offset and trigger height
 M557 X15:280 Y35:260 P3:3                      	    ; Define mesh grid
 
 ; Heated Bed Settings
 M308 S0 P"temp0" Y"thermistor" A"Keenovo" T100000 B3950 R4700 H0 L0     ; configure sensor 0 as thermistor on pin temp0
 M950 H0 C"out0" T0                                                      ; create bed heater output on out0 and map it to sensor 0
 M307 H0 A239.3 C431.9 D1.0 B0 S1.00 V0                                  ; Set heating process parameters [H0:Bed, ACD, (B)angBang: Disabled, PWM:1.0]
-M143 H0 S80                                                             ; set temperature limit for heater 0 to 80C
 M140 H0							                                        ; Define bed
+M143 H0 S80                                                             ; set temperature limit for heater 0 to 80C
 
 ; Print Hed Settings
-M308 S1 P"spi.cs0" Y"rtd-max31865" A"Print-Head_Temp"   ; configure sensor 1 as thermocouple via CS pin spi.cs0
-M950 H1 C"out1" T1                                      ; create nozzle heater output on out1 and map it to sensor 1
-M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
-M143 H1 S350                                            ; set temperature limit for heater 1 to 350C
-;M570 S360				                				; Print will be terminated if a heater fault is not reset within 360 seconds.
-M563 P0 S"Print Head" D0 H1 F0                          ; define tool 0
+M308 S1 P"temp1" Y"pt1000" A"Print-Head_Temp" R2200         ; configure sensor 0 as PT1000 on pin temp1
+M950 H1 C"out1" T1                                          ; create nozzle heater output on out1 and map it to sensor 1
+;M308 S1 P"121.temp0" Y"pt1000" R2200                       ; configure sensor 1 as PT1000 on pin 121.temp0
+;M950 H1 C"121.out0" T1                                     ; create nozzle heater output on 121.out0 and map it to sensor 1
+M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				    ; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
+M143 H1 S350                                                ; set temperature limit for heater 1 to 350C
+M563 P0 S"Print Head" D0 H1 F0                              ; define tool 0
 
 ;Virtual Sensor
-M308 S2 P"temp1" Y"thermistor" A"Chamber" T100000 B3950 R4700 H0 L0
+M308 S2 P"temp2" Y"thermistor" A"Chamber-High" T100000 B3950 R4700 H0 L0
+M308 S3 P"temp3" Y"thermistor" A"Chamber-Low" T100000 B3950 R4700 H0 L0
 
 ; Fans
-; Part Cooling Fan
-M950 F0 C"out5" Q500            ; create fan 0 on pin out5 and set its frequency
+; Part Cooling Fan [Fan 0]
+M950 F0 C"out4" Q500            ; create fan 0 on pin out5 and set its frequency
 M106 P0 C"Part Fan" S0 H-1      ; set fan 0 name and value. Thermostatic control is turned off
-; Print Fan
-M950 F1 C"out4" Q500            ; create fan 1 on pin out4 and set its frequency
-M106 P1 C"Tool Fan" S1 H1:2 T45 ; set fan 1 name and value. Thermostatic control is turned on
+;M950 F0 C"121.out1" Q500       ; create fan 0 on pin 121.out1 and set its frequency
+;M106 P0 S0 H-1                 ; set fan 0 value. Thermostatic control is turned off
+; Print Fan [Fan 1]
+M950 F1 C"out5" Q500            ; create fan 1 on pin out4 and set its frequency
+M106 P1 C"Tool Fan" S1 H1 T45   ; set fan 1 name and value. Thermostatic control is turned on
+;M950 F1 C"121.out2" Q500       ; create fan 1 on pin 121.out2 and set its frequency
+;M106 P1 S1 H1 T45              ; set fan 1 value. Thermostatic control is turned on
 
 ; Tool definitions
 G10 P0 X0 Y0 Z0                 ; set tool 0 axis offsets
