@@ -49,9 +49,9 @@ M566 Z{0.3 * 60}                        ; Maximum jerk speed [0.3mm/sec]
 
 ; Extruder
 M584 E0.5                               ; Set drive mapping extruder (E0) to drive 5
-;M584 E121.0                               ; Set drive mapping extruder (E0) to drive 0 [ToolBoard]
 M569 P0.5 S0 D2                         ; Drive 5 goes backwards
-;M569 P121.0 S0 D2                         ; Drive 0 [ToolBoard] goes backwards
+;M584 E121.0                            ; Set drive mapping extruder (E0) to drive 0 [ToolBoard]
+;M569 P121.0 S0 D2                      ; Drive 0 [ToolBoard] goes backwards
 M350 E16 I1	        	                ; Set 16x microstepping w/ interpolation
 M92 E830	        	                ; Set axis steps per unit
 M906 E{1400 * 0.67} I30	                ; Set motor currents (mA)
