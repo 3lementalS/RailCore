@@ -1,17 +1,9 @@
 ; Communication and general
 ; Duet GCode: https://duet3d.dozuki.com/Wiki/Gcode
-M111 S0                                                                     ; Debug off
-M550 P"RailCore"		                                                    ; Machine name and Netbios name (can be anything you like)
-M551 P"GGamer1894@!"	                                                    ; Machine password (used for FTP)
-M552 S1					                                                    ; Enable WiFi
-M586 P0 S1                                                                  ; Enable HTTP
-M586 P1 S1                                                                  ; Enable FTP
-M586 P2 S1                                                                  ; Enable Telnet
-M555 P2                                                                     ; Set compatibility [S2:Marlin]
-G21                                                                         ; Set Units to Millimeters
-G90                                                                         ; Set to Absolute Positioning
-M83                                                                         ; Set extruder to relative mode
-M669 K1					                                                    ; Select CoreXY
+G90                                                                         ; send absolute coordinates...
+M83                                                                         ; ...but relative extruder moves
+M550 P"RailCore"                                                            ; set printer name
+M669 K1                                                                     ; select CoreXY mode
 
 ; Drives
 ; X Axis                                                                    ; https://duet3d.dozuki.com/Wiki/ConfiguringRepRapFirmwareCoreXYPrinter
@@ -93,13 +85,13 @@ M308 S0 P"temp0" Y"thermistor" A"Keenovo" T100000 B3950 R4700               ; co
 M950 H0 C"out0" T0                                                          ; create bed heater output on out0 and map it to sensor 0
 M307 H0 A239.3 C431.9 D1.0 B0 S1.00 V0                                      ; Set heating process parameters [H0:Bed, ACD, (B)angBang: Disabled, PWM:1.0]
 M140 H0							                                            ; Define bed
-M143 H0 S80                                                                 ; set temperature limit for heater 0 to 80C
+M143 H0 S120                                                                 ; set temperature limit for heater 0 to 120C
 
 ; Print Hed Settings
 M308 S1 P"temp1" Y"pt1000" A"Print-Head_Temp" R2200                         ; configure sensor 0 as PT1000 on pin temp1
 M950 H1 C"out1" T1                                                          ; create nozzle heater output on out1 and map it to sensor 1
 M307 H1 A243.5 C96.5 D1.7 B0 S1.00 V24.2				                    ; Set heating process parameters [H1:Print-Head, ACD, (B)angBang: Disabled, PWM:1.0]
-M143 H1 S350                                                                ; set temperature limit for heater 1 to 350C
+M143 H1 S300                                                                ; set temperature limit for heater 1 to 300C
 M563 P0 S"Print Head" D0 H1 F0                                              ; define tool 0
 
 ;Virtual Sensor
@@ -111,7 +103,7 @@ M308 S3 P"temp3" Y"thermistor" A"Chamber-Low" T100000 B3950 R4700 H0 L0
 M950 F0 C"out7" Q500                                                        ; create fan 0 on pin out7 and set its frequency
 M106 P0 C"Part-Fan" S0 H-1                                                  ; set fan 0 name and value. Thermostatic control is turned off
 ; Print Fan [Fan 1]
-M950 F1 C"out8" Q10                                                         ; create fan 1 on pin out8 and set its frequency
+M950 F1 C"out8" Q500                                                        ; create fan 1 on pin out8 and set its frequency
 M106 P1 C"Tool-Fan" S0.7 H1 T45                                             ; set fan 1 name and value. Thermostatic control is turned on
 
 ; Tool definitions
